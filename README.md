@@ -114,6 +114,29 @@ var mySocket = new WebSocket("ws://www.example.com/socketserver", "my-custom-pro
 ```
 第一個參數為連線URL，第二個則是所選擇的通訊協定(選填)，且第一個參數有分ws://（非加密連線） 和 wss://（加密連線）
 
+傳送資料給server:
+```
+mySocket.send("Hello Server！ I am Client");
+```
+也可以使用JSON格式來傳遞
+```
+// 透過伺服器傳送文字給所有使用者
+
+function sendText() {
+  var msg = {
+    type: "message",
+    text: document.getElementById("text").value,
+    id: clientID,
+    date: Date.now()
+  };
+
+  mySocket.send(JSON.stringify(msg));
+  document.getElementById("text").value = "";
+}
+```
+
+以下是配合上面server.js的範例
+
 ```
 <!DOCTYPE html>
 <html>
